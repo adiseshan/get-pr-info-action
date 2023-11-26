@@ -7,9 +7,7 @@ on:
 
 jobs:
   yaml:
-    runs-on:
-      - self-hosted
-      - default-k8s-runner-linux-x64
+    runs-on: ubuntu-latest
     container:
       image: adiseshan/actions-ci-runner:v1.0.0
       credentials:

@@ -20,9 +20,7 @@ jobs:
     name: major tag update ${{ github.event.inputs.TAG_NAME || github.event.release.tag_name }} changes
     environment:
       name: releaseNewActionVersion
-    runs-on:
-      - self-hosted
-      - default-k8s-runner-linux-x64
+    runs-on: ubuntu-latest
     steps:
       - name: Update the ${{ env.TAG_NAME }} tag
         id: update-major-tag

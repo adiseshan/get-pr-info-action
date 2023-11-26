@@ -62,9 +62,7 @@ env:
 
 jobs:
   create-new-release:
-    runs-on:
-      - self-hosted
-      - default-k8s-runner-linux-x64
+    runs-on: ubuntu-latest
     container: 
       image: adiseshan/gh:v1.0.0
       credentials:
