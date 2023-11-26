@@ -1,0 +1,38 @@
+name: "get-pr-info-action"
+description: "identify the pr number for the given gitsha"
+author: "Adiseshan K"
+inputs:
+  INPUT_GITHUB_HOSTNAME:
+    description: "github hostname if ghe"
+    default: "github.com"
+    required: false
+  INPUT_GITHUB_TOKEN:
+    description: "Input github token"
+  INPUT_GITHUB_SHA:
+    description: "Input github sha"
+
+outputs:
+  OUTPUT_PR_NUMBER:
+    description: "PR number which created the INPUT_GITHUB_SHA"
+    value: ${{ steps.get-pr-info.outputs.pr_number }}
+  OUTPUT_PR_TITLE:
+    description: "PR title which created the INPUT_GITHUB_SHA"
+    value: ${{ steps.get-pr-info.outputs.pr_title }}
+  OUTPUT_PR_BODY:
+    description: "PR body which created the INPUT_GITHUB_SHA"
+    value: ${{ steps.get-pr-info.outputs.pr_body }}
+  OUTPUT_PR_URL:
+    description: "PR url which created the INPUT_GITHUB_SHA"
+    value: ${{ steps.get-pr-info.outputs.pr_url }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: get pr for git sha
+      id: get-pr-info
+      shell: bash
+      run: /bin/bash ${GITHUB_ACTION_PATH}/get-pr-info.sh
+      env:
+        INPUT_GITHUB_SHA: ${{ inputs.INPUT_GITHUB_SHA }}
+        INPUT_GITHUB_TOKEN: ${{ inputs.INPUT_GITHUB_TOKEN }}
+        INPUT_GITHUB_HOSTNAME: ${{ inputs.INPUT_GITHUB_HOSTNAME }}
